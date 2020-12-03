@@ -10,7 +10,7 @@ Vue.use(ElementUI)
 // 挂载axios到原型
 Vue.prototype.$axios = axios
 //设置默认的 api 域名基准路径
-axios.defaults.baseURL = 'http://127.0.0.1:3000'
+axios.defaults.baseURL = ' http://157.122.54.189:9083/'
 
 Vue.config.productionTip = false
 
