@@ -6,16 +6,22 @@
         <span style="margin-left: 10px">2020-12-03</span>
       </template>
     </el-table-column>
-    <el-table-column label="姓名" width="180">
+    <el-table-column label="缩略图" width="200">
       <template slot-scope="scope">
-        <el-popover trigger="hover" placement="top">
-          <p>文章: {{ scope.row.title }}</p>
-          <div slot="reference" class="name-wrapper">
-            <el-tag size="medium">{{ scope.row.user.username }}</el-tag>
-          </div>
-        </el-popover>
+        <img
+          v-if="scope.row.cover.length > 0"
+          :src="scope.row.cover[0].url | fixImgUrl"
+          class="thumbnail"
+        />
+        <img v-else src="@/assets/logo.png" class="thumbnail" />
       </template>
     </el-table-column>
+    <el-table-column label="标题" prop="title"> </el-table-column>
+    <el-table-column
+      label="作者"
+      width="140"
+      prop="user.nickname"
+    ></el-table-column>
     <el-table-column label="操作">
       <template>
         <el-button size="mini">编辑</el-button>
@@ -46,4 +52,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.thumbnail {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
 </style>
