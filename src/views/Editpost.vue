@@ -110,11 +110,13 @@ export default {
       console.log(file);
       file.id = res.data.id;
       this.form.cover.push(file);
+      this.$message("添加成功");
     },
     coverRemove(file, fileList) {
       // console.log(fileList);
       // 删除封面，点击删除之后重新获取fileList列表中的数据返回给this.form.cover
       this.form.cover = fileList;
+      this.$message("删除成功");
     },
     subMit() {
       // console.log(this.form);
