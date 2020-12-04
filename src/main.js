@@ -11,6 +11,7 @@ Vue.use(ElementUI)
 Vue.prototype.$axios = axios
 //设置默认的 api 域名基准路径
 axios.defaults.baseURL = 'http://liangwei.tech:3000'
+// axios.defaults.baseURL = 'http://157.122.54.189:9083'
 
 // 过滤器
 Vue.filter('fixImgUrl', (oldUrl) => {

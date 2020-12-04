@@ -19,6 +19,7 @@
       </el-form-item>
       <el-form-item label="封面">
         <el-upload
+          :file-list="form.cover"
           :action="$axios.defaults.baseURL + '/upload'"
           :headers="{ Authorization: token }"
           list-type="picture-card"
@@ -75,6 +76,25 @@ export default {
       res.data.data.splice(0, 2);
       this.categoryList = res.data.data;
     });
+    // 获取编辑文章信息
+    if (this.$route.query.id) {
+      this.$axios({
+        url: "/post/" + this.$route.query.id,
+      }).then((res) => {
+        console.log(res);
+        this.checkList = res.data.data.categories.map((item) => {
+          return item.id;
+        });
+        res.data.data.cover.map((img) => {
+          if (img.url.indexOf("http") == -1) {
+            img.url = this.$axios.defaults.baseURL + img.url;
+          }
+          img.uid = img.id;
+          return img;
+        });
+        this.form = res.data.data;
+      });
+    }
   },
   watch: {
     checkList() {
@@ -87,11 +107,15 @@ export default {
   },
   methods: {
     coverSuccse(res, file, fileList) {
-      console.log("上传成功");
+      console.log(file);
       file.id = res.data.id;
       this.form.cover.push(file);
     },
-    coverRemove(file, fileLisr) {},
+    coverRemove(file, fileList) {
+      // console.log(fileList);
+      // 删除封面，点击删除之后重新获取fileList列表中的数据返回给this.form.cover
+      this.form.cover = fileList;
+    },
     subMit() {
       // console.log(this.form);
       this.$axios({

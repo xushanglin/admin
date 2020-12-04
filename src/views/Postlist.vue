@@ -24,8 +24,13 @@
         prop="user.nickname"
       ></el-table-column>
       <el-table-column label="操作">
-        <template>
-          <el-button type="warning" size="small">编辑</el-button>
+        <template slot-scope="scope">
+          <el-button
+            type="warning"
+            size="small"
+            @click="$router.push('/editpost?id=' + scope.row.id)"
+            >编辑</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
